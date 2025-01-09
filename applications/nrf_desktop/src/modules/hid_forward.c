@@ -217,17 +217,6 @@ static uint8_t hogp_read(struct bt_hogp *hids_c,
 	uint8_t report_id = bt_hogp_rep_id(rep);
 	size_t size = bt_hogp_rep_size(rep);
 
-	/* HID boot protocol reports are received with report ID equal 0 (REPORT_ID_RESERVED).
-	 * The report ID must be updated before HID report is forwarded as an Event Manager event.
-	 */
-	if (report_id == REPORT_ID_RESERVED) {
-		if (bt_hogp_rep_boot_kbd_in(hids_c)) {
-			report_id = REPORT_ID_BOOT_KEYBOARD;
-		} else if (bt_hogp_rep_boot_mouse_in(hids_c)) {
-			report_id = REPORT_ID_BOOT_MOUSE;
-		}
-	}
-
 	forward_hid_report(per, report_id, data, size);
 
 	return BT_GATT_ITER_CONTINUE;
