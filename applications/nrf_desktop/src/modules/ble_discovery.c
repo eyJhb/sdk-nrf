@@ -79,8 +79,13 @@ static void hids_discovery_completed(struct bt_gatt_dm *dm, void *context)
 	event->dm = dm;
 	event->pid = peer_pid;
 	event->peer_llpm_support = peer_llpm_support;
-	__ASSERT_NO_MSG(sizeof(peer_hwid) == sizeof(event->hwid));
-	memcpy(event->hwid, peer_hwid, sizeof(peer_hwid));
+
+	// setup hwid
+	const bt_addr_le_t *peer_addr = bt_conn_get_dst(discovering_peer_conn);
+	uint8_t hwid[] = {peer_addr->a.val[5], peer_addr->a.val[4], peer_addr->a.val[3],
+	              peer_addr->a.val[2], peer_addr->a.val[1], peer_addr->a.val[0], 0x11, 0x11};
+	__ASSERT_NO_MSG(sizeof(hwid) == HWID_LEN);
+	memcpy(event->hwid, hwid, HWID_LEN);
 
 	for (size_t i = 0; i < ARRAY_SIZE(bt_peripherals); i++) {
 		if (bt_peripherals[i].pid == peer_pid) {
@@ -299,7 +304,11 @@ static void next_discovery_step_fn(struct k_work *w)
 	BUILD_ASSERT((DISCOVERY_STATE_HIDS + 1) == DISCOVERY_STATE_COUNT,
 		"HIDs must be discovered last - after device is verified");
 
-	state++;
+        if (state == DISCOVERY_STATE_DEV_DESCR_LLPM || state == DISCOVERY_STATE_DEV_DESCR_HWID || state == DISCOVERY_STATE_START) {
+            state = DISCOVERY_STATE_DIS;
+        } else {
+            state++;
+        }
 
 	switch (state) {
 	case DISCOVERY_STATE_DEV_DESCR_LLPM:
