@@ -114,7 +114,7 @@ static const uint8_t output_reports[] = {
 /* Size of the biggest supported HID output report that is part of output reports map. */
 #define REPORT_BUFFER_SIZE_OUTPUT_REPORT	_REPORT_BUFFER_SIZE_KEYBOARD_LEDS
 
-extern const uint8_t hid_report_desc[];
+extern const uint8_t *hid_report_desc;
 extern const size_t hid_report_desc_size;
 
 /**
