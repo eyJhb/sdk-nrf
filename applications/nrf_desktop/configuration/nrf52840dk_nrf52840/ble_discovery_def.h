@@ -20,24 +20,12 @@ struct bt_peripheral {
 	enum peer_type peer_type;
 };
 
-static const uint16_t vendor_vid = 0x1915;
+static const uint16_t vendor_vid = 0x16c0;
 
 /* Peripherals parameters. */
 static const struct bt_peripheral bt_peripherals[] = {
 	{
-		.pid = 0x52da,
-		.peer_type = PEER_TYPE_MOUSE,
-	},
-	{
-		.pid = 0x52db,
-		.peer_type = PEER_TYPE_MOUSE,
-	},
-	{
-		.pid = 0x52de,
-		.peer_type = PEER_TYPE_MOUSE,
-	},
-	{
-		.pid = 0x52dd,
+		.pid = 0x27db,
 		.peer_type = PEER_TYPE_KEYBOARD,
 	},
 };
