@@ -39,6 +39,8 @@ manifest:
       url-base: https://github.com/boschsensortec
     - name: eembc
       url-base: https://github.com/eembc
+    - name: zmkfirmware
+      url-base: https://github.com/zmkfirmware
 
   # If not otherwise specified, the projects below should be obtained
   # from the ncs remote.
@@ -290,6 +292,11 @@ manifest:
       revision: d5fad6bd094899101a4e5fd53af7298160ced6ab
       groups:
         - benchmark
+    - name: zmk
+      repo-path: zmk
+      path: zmk
+      revision: v0.1.0
+      remote: zmkfirmware
 
   # West-related configuration for the nrf repository.
   self:
