@@ -14,7 +14,7 @@
 #define CONFIG_ZMK_HID_CONSUMER_REPORT_USAGES_FULL 1
 
 #define CONFIG_ZMK_HID_INDICATORS 1
-#define CONFIG_ZMK_MOUSE 1
+#define CONFIG_ZMK_POINTING 1
 #include <zmk/hid.h>
 
 const uint8_t *hid_report_desc = zmk_hid_report_desc;

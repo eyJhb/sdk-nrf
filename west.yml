@@ -295,7 +295,7 @@ manifest:
     - name: zmk
       repo-path: zmk
       path: zmk
-      revision: v0.1.0
+      revision: bb486619a183f6df7fbb4620c80164555a22da0b
       remote: zmkfirmware
 
   # West-related configuration for the nrf repository.
